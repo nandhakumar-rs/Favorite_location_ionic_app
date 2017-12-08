@@ -1,0 +1,71 @@
+<!--
+  Generated template for the AddplacePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Add New Place</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<form #form="ngForm" (ngSubmit) = "add(form)" >
+  <ion-list>
+    <ion-item>
+      <ion-label fixed>Title</ion-label>
+      <ion-input required ngModel name="title" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label floating>Description</ion-label>
+        <ion-textarea  ngModel name="description"></ion-textarea>
+      </ion-item>
+  </ion-list>
+ <ion-grid>
+   <ion-row>
+     <ion-col>
+        <button block ion-button type="button" outline (click)="findMyLocation()">
+            Locate Me
+              </button>
+     </ion-col>
+     <ion-col>
+        <button block ion-button type="button" outline (click) = "locateInMap()">
+            Select on Map
+              </button>
+     </ion-col>
+   </ion-row>
+   <ion-row *ngIf="isLocationSelected">
+     <ion-col>
+        <agm-map [latitude]="Location.latitude" [longitude]="Location.longitude" [zoom]="16">
+            <agm-marker [latitude]="Location.latitude" [longitude]="Location.longitude">
+            
+            </agm-marker>
+                   </agm-map>
+     </ion-col>
+   </ion-row>
+   <ion-row >
+     <ion-col text-center>
+        <h3>Take a Photo...</h3>
+     </ion-col>
+   </ion-row>
+   <ion-row>
+     <ion-col>
+        <img [src] = "imgUrl">
+     </ion-col>
+   </ion-row>
+  
+   <ion-row>
+     <ion-col>
+        <button block ion-button type="button" outline (click)="openCamera() ">
+            Open Camera
+              </button>
+     </ion-col>
+   </ion-row>
+ </ion-grid>
+<button ion-button block [disabled] = "!form.valid" type="submit">Add this Place</button>
+</form>
+</ion-content>
